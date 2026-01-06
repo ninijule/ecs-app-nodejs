@@ -5,8 +5,8 @@ const app = express();
 app.use(express.json());
 
 
-app.listen(3000, () => {
-    console.log(`Server running on port 3000`);
+app.listen(80, () => {
+    console.log(`Server running on port 80`);
 });
 
 app.get('/', (req, res) => {
