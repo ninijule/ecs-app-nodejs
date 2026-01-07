@@ -1,0 +1,12 @@
+version: 0.2
+
+phases:
+  post_build:
+    commands:
+      - echo "Generating imagedefinitions.json"
+      - printf '[{"name":"my-container","imageUri":"%s"}]' \
+        "$IMAGE_URI" > imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
