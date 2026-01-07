@@ -14,5 +14,5 @@ app.get('/', (_req, res) => {
 });
 
 app.get('/health', (_req, res) => {
-    res.send('ping');
+    res.send('pong');
 });
