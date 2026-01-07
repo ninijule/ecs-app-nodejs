@@ -16,3 +16,7 @@ app.get('/', (_req, res) => {
 app.get('/health', (_req, res) => {
     res.send('Working');
 });
+
+app.get('/ping', (_req, res) => {
+    res.send('Working');
+});
