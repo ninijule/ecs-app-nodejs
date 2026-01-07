@@ -1,12 +1,17 @@
-version: 0.2
-
+version: "0.2"
 phases:
-  post_build:
+  pre_build:
     commands:
-      - echo "Generating imagedefinitions.json"
-      - printf '[{"name":"my-container","imageUri":"%s"}]' \
-        "$IMAGE_URI" > imagedefinitions.json
-
+      - aws ecr get-login-password --region eu-west-3 | docker login --username AWS --password-stdin 889982481835.dkr.ecr.eu-west-3.amazonaws.com
+      - build:
+          commands:
+            - docker build -t $ImageName -f ./Dockerfile .
+            - docker images
+            - post_build:
+                commands:
+                  - docker tag $ImageName:latest 889982481835.dkr.ecr.eu-west-3.amazonaws.com/$ImageName:latest
+                  - docker push 889982481835.dkr.ecr.eu-west-3.amazonaws.com/$ImageName:latest
+                  - echo "test"
 artifacts:
   files:
     - imagedefinitions.json
